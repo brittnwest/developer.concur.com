@@ -1,9 +1,8 @@
 ---
-title: Vendors
+title: Vendor v3
 layout: reference
 ---
 
-# Vendors
 * [Retrieve an existing vendor](#get)
 * [Create vendors](#post)
 * [Update existing vendors](#put)
@@ -14,10 +13,10 @@ layout: reference
 * [Schema](#schema)
 
 ## Version
+
 3.0  
 
-
-## <a name="get"></a>Retrieve an existing vendor 
+## <a name="get"></a>Retrieve an existing vendor
 
     GET  /api/v3.0/invoice/vendors
     Note: If authenticating with a Company JWT the API will return all vendors associated with a specific entity.
@@ -84,7 +83,7 @@ None.
 Name | Type | Format | Description
 -----|------|--------|------------
 `vendors`|-|`body`|The vendor details.
-  
+
 ### Input  
 
 
@@ -138,7 +137,7 @@ None.
 
     PUT /api/v3.0/invoice/vendor/banks
     Note: If authenticating with a Company JWT, the API will create / update the requested Vendor Banking info.
-    
+
 ### Parameters
 
 Name | Type | Format | Description
@@ -157,7 +156,7 @@ Name | Type | Format | Description
 
     PUT /api/v3.0/invoice/vendor/groups
     Note: If authenticating with a Company JWT, the API will create the requested Vendor groups.
-    
+
 ### Parameters
 
 Name | Type | Format | Description
