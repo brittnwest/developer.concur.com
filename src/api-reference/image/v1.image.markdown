@@ -1,0 +1,106 @@
+---
+title: Image v1
+layout: reference
+---
+
+{% include deprecation-alert.html %}
+
+The Image resource represents a receipt image or an invoice image.
+
+https://www.concursolutions.com/api/image/v1.0/
+
+* [Post a receipt image](#post-receipt-image)
+* [Schema](#schema)
+  * [Stuff](#schema-stuff)
+
+## <a name="post-receipt-image"></a>Post a receipt image
+
+Uploads a receipt image and associates it with the OAuth consumer. The user can view the image in the receipt management section of Concur.
+
+### Scopes
+
+<!-- ToDo -->
+
+Name|Description
+---|---
+`scope`|Description
+
+### Request
+
+#### Headers
+
+* [RFC 7235 Authorization](https://tools.ietf.org/html/rfc7235#section-4.2)
+* [RFC 7230 Content-Length](https://tools.ietf.org/html/rfc7230#section-3.3.2)
+* [RFC 7231 Content-Type](https://tools.ietf.org/html/rfc7231#section-3.1.1.5)
+  * `application/pdf` - PDF images cannot be encrypted or password protected.
+  * `image/jpg`
+  * `image/jpeg`
+  * `image/png`
+
+#### Parameters
+
+Name|Type|Format|Description
+---|---|---|---
+`receipt`|`string`|-|**Required** Keyword specifying this is a receipt image.
+
+##### URI Template
+
+```
+https://www.concursolutions.com/api/image/v1.0/receipt
+```
+
+#### Payload
+
+A byte array containing the image data.
+
+### Response
+
+#### Status Codes
+
+* [201 Created](https://tools.ietf.org/html/rfc7231#section-6.3.2)
+
+#### Headers
+
+* [RFC 7231 Content-Type](https://tools.ietf.org/html/rfc7231#section-3.1.1.5)
+
+#### Payload
+
+[Result](#schema-image-result)
+
+### Example
+
+#### Request
+
+```
+POST https://www.concursolutions.com/api/image/v1.0/receipt
+Authorization: OAuth {access token}
+Content-Length: 65536
+Content-Type: image/jpeg
+```
+
+```
+{byte array}
+```
+
+#### Response
+
+```
+201 Created
+Content-Type: application/xml
+```
+
+```xml
+<Image xmlns="http://www.concursolutions.com/api/image/2011/02" xmlns:i="http://www.w3.org/2001/XMLSchema-instance">
+  <Id>aBcDeMwbl34xnwdkUw5ZjDsggDl2$pyoy31$pnGaHAywmPrpbAmE</Id>
+  <Url />
+</Image>
+```
+
+## <a name="schema"></a>Schema
+
+### <a name="schema-image-result"></a>Result
+
+Name|Type|Format|Description
+---|---|---|---
+`Id`|`string`|-|The unique identifier of the image.
+`Url`|`string`|-|The URL for the image. This element is empty when uploading images.
