@@ -1,5 +1,6 @@
 version: 2
 jobs: 
+
   build: 
     docker: 
       - image: circleci/ruby:2.5.1
@@ -10,10 +11,34 @@ jobs:
       - run: .circleci/write_commit.sh
       - run: .circleci/write_forms.sh
       - run: bundle exec jekyll build
+      - persist_to_workspace:
+          root: ./
+          paths:
+            - _site
 
+  deploy_test:
+    docker:
+      - image: cgswong/aws:aws
+    environment:
+      S3_BUCKET: test-developer-concur-com
+    steps:
+      - attach_workspace:
+        at: ./
+      - run:
+        name: Upload to S3
+        command: s3 sync ./_site s3://$S3_BUCKET --delete --region us-west-2 --output text
 
-
-
+workflows:
+  version: 2
+  build_deploy_test:
+    jobs:
+      - build
+      - deploy_test:
+        requires:
+          - build
+        filters:
+          branches:
+            only: howarddierking/circleci-upgrade
 
 
 
