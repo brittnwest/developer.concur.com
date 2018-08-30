@@ -1,6 +1,5 @@
 version: 2
 jobs: 
-
   build: 
     docker: 
       - image: circleci/ruby:2.5.1
@@ -33,12 +32,13 @@ workflows:
   build-deploy-test:
     jobs:
       - build
-      - deploy_test:
+      - deploy-test:
         requires:
           - build
         filters:
           branches:
-            only: howarddierking/circleci-upgrade
+            only: 
+              - howarddierking/circleci-upgrade
 
 
 
