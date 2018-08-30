@@ -33,12 +33,12 @@ workflows:
     jobs:
       - build
       - deploy-test:
-        requires:
-          - build
-        filters:
-          branches:
-            only: 
-              - howarddierking/circleci-upgrade
+          requires:
+            - build
+          filters:
+            branches:
+              only: 
+                - howarddierking/circleci-upgrade
 
 
 
