@@ -22,10 +22,10 @@ jobs:
       S3_BUCKET: test-developer-concur-com
     steps:
       - attach_workspace:
-        at: ./
+          at: ./
       - run:
-        name: Upload to S3
-        command: s3 sync ./_site s3://$S3_BUCKET --delete --region us-west-2 --output text
+          name: Upload to S3
+          command: s3 sync ./_site s3://$S3_BUCKET --delete --region us-west-2 --output text
 
 workflows:
   version: 2
