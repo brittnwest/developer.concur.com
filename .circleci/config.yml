@@ -6,9 +6,9 @@ jobs:
     steps:
       - checkout
       - run: bundle install 
-      - run: ./write_branch.sh
-      - run: ./write_commit.sh
-      - run: ./write_forms.sh
+      - run: .circleci/write_branch.sh
+      - run: .circleci/write_commit.sh
+      - run: .circleci/write_forms.sh
       - run: bundle exec jekyll build
 
 
