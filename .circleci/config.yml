@@ -1,0 +1,54 @@
+version: 2
+jobs: 
+  build: 
+    docker: 
+      - image: circleci/ruby:2.5
+    steps:
+      - run: checkout
+      - run: bundle install 
+      - run: ./write_branch.sh
+      - run: ./write_commit.sh
+      - run: ./write_forms.sh
+      - run: bundle exec jekyll build
+
+
+
+
+
+
+
+
+
+# machine:
+#   timezone:
+#     America/Los_Angeles
+#   ruby:
+#     version: 2.2.5
+
+# general:
+#   branches:
+#     only:
+#       - preview
+#       - livesite
+
+# dependencies:
+#   override:
+#     - ./build/install_aws_cli.sh
+#     - bundle install
+
+# test:
+#   override:
+#     - ./build/write_branch.sh
+#     - ./build/write_commit.sh
+#     - ./build/write_forms.sh
+#     - bundle exec jekyll build
+
+# deployment:
+#   preview:
+#     branch: preview
+#     commands:
+#       - aws s3 sync ./_site s3://preview-developer-concur-com --delete --region us-west-2 --output text
+#   livesite:
+#     branch: livesite
+#     commands:
+#       - aws s3 sync ./_site s3://livesite-developer-concur-com --delete --region us-west-2 --output text
